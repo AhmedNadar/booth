@@ -1,0 +1,8 @@
+%h3 All Posts
+- @posts.each do |post|
+  %p= link_to post.title, post
+  %p= post.content
+  %p= link_to post.link
+  %hr/
+
+%p=link_to "New Post", new_post_path
