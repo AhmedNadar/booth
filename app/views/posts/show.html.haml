@@ -1,3 +1,6 @@
+= content_for :title do
+  = @post.title
+
 %h2= @post.title
 %p= image_tag @post.image.url(:medium)
 %p= link_to @post.link, @post.link

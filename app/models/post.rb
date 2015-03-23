@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   # associations
   belongs_to :user
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
 
 
   #validation
@@ -22,4 +22,11 @@ class Post < ActiveRecord::Base
   # acts as votable
   acts_as_votable
 
+  # friendly id
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+  validates_presence_of :slug
+  def should_generate_new_friendly_id?
+   title_changed?
+  end
 end

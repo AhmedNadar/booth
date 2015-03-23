@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :find_user, only: [:new, :create, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_post_redirect, only: [:show]
 
   def index
     # @posts = Post.all.order("created_at DESC") #order based on creation date
@@ -12,8 +13,7 @@ class PostsController < ApplicationController
     @commentable = @post
     @comments = @commentable.comments
     @comment = Comment.new
-    @random_post = Post.where.not(id: @post).order("RANDOM()").first
-    # @random_post = Post.where.not(id: @post).order("RANDOM()").first
+    @random_post = Post.friendly.where.not(id: @post).order("RANDOM()").first
 
   end
 
@@ -61,14 +61,24 @@ class PostsController < ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:title, :content, :link, :image)
+    params.require(:post).permit(:title, :content, :link, :image, :slug)
   end
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
   end
 
   def find_user
     @user = current_user
+  end
+
+  def set_post_redirect
+    @post = Post.friendly.find(params[:id])
+    # If an old id or a numeric id was used to find the record, then
+    # the request path will not match the post_path, and we should do
+    # a 301 redirect that uses the current friendly id.
+    if request.path != post_path(@post)
+      redirect_to @post, status: :moved_permanently
+    end
   end
 end
