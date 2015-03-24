@@ -7,6 +7,8 @@ class PostsController < ApplicationController
   def index
     # @posts = Post.all.order("created_at DESC") #order based on creation date
     @posts = Post.all.order(cached_votes_up: :desc) #order based on numbers of votes up
+    @posts = Post.paginate(:page => params[:page], :per_page => 1)
+    @titles = Post.all
   end
 
   def show

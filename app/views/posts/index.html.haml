@@ -1,3 +1,4 @@
+= will_paginate @posts
 %h3 All Posts
 - @posts.each do |post|
   %p= link_to image_tag(post.image.url(:small)), post

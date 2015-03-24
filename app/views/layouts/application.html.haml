@@ -23,3 +23,9 @@
       = link_to 'Sign up', new_user_registration_path
     %hr/
     = yield
+
+
+    %h2 Recent Posts
+  %ul
+    - @titles.each do |post|
+      %li= link_to post.title, post

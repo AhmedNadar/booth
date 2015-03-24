@@ -25,6 +25,8 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'friendly_id', '~> 5.0.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem "interactive_editor"
+gem 'will_paginate', '~> 3.0.6'
+
 
 group :development, :test do
  gem 'byebug'
