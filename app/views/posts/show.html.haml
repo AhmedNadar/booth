@@ -29,6 +29,7 @@
     before you comment!
 
 %p Random Posts
-= link_to (image_tag @random_post.image.url(:medium)), post_path(@random_post)
-= @random_post.title
-= @random_post.user.name
+%ul
+  %li= link_to (image_tag @random_post.image.url(:medium)), post_path(@random_post)
+  %li= @random_post.title
+  %li= @random_post.user.name

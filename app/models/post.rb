@@ -3,7 +3,6 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-
   #validation
   validates_presence_of :title, :content, :link
 

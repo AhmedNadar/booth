@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_filter :load_commentable
 
   def index
-    @commentable = Post.find(params[:post_id])
+    @commentable = Post.friendly.find(params[:post_id])
     @comments = @commentable.comments
   end
 
@@ -39,6 +39,6 @@ class CommentsController < ApplicationController
 
   def load_commentable
     resource, id = request.path.split('/')[1,2] # /post/1
-    @commentable = resource.singularize.classify.constantize.find(id) # Post.find(1)
+    @commentable = resource.singularize.classify.constantize.friendly.find(id) # Post.find(1)
   end
 end
