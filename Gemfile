@@ -9,6 +9,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~> 3.3.4'
 gem 'devise', '3.4.1'
 gem 'simple_form', '3.1.0'
 gem 'awesome_print'
@@ -21,12 +22,9 @@ gem 'normalize-rails', '~> 3.0.0'
 gem 'font-awesome-sass', '~> 4.3.0'
 gem 'haml-rails'
 gem 'will_paginate', '~> 3.0.6'
-gem 'friendly_id'
+gem 'friendly_id', '~> 5.0.0'
 gem 'acts_as_votable', '~> 0.10.0'
-
-group :development do
-    gem "interactive_editor"
-end
+gem "interactive_editor"
 
 group :development, :test do
  gem 'byebug'

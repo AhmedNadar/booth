@@ -1,0 +1,7 @@
+/simple_form_for([@post, @post.comments.build]) do |form|
+/form.input :body, label: false
+/form.button :submit
+
+= simple_form_for [@commentable, @comment] do |f|
+  = f.input :body,  as: :text, rows: 8
+  = f.button :submit

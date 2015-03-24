@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
 
   # associations
   has_many :posts
+  has_many :comments, as: :commentable
+
+  acts_as_voter
 end

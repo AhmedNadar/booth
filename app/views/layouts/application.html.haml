@@ -9,7 +9,9 @@
   %body
     %p.notice= notice
     %p.alert= alert
-
+    %nav
+      = link_to "Home", root_path
+    %hr/
     - if user_signed_in?
       Welcome,
       %strong
@@ -19,5 +21,5 @@
     - else
       = link_to 'Sign in', new_user_session_path
       = link_to 'Sign up', new_user_registration_path
-
+    %hr/
     = yield

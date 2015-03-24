@@ -1,5 +1,6 @@
-= simple_form_for @post do |f|
+= simple_form_for @post, html: { multipart: true } do |f|
+  %p= f.input :image
   %p= f.input :title
   %p= f.input :link
-  %p= f.input :content
+  %p= f.input :content, as: :text
   %p= f.button :submit

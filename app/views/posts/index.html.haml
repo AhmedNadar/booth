@@ -1,8 +1,11 @@
 %h3 All Posts
 - @posts.each do |post|
-  %p= link_to post.title, post
+  %p= link_to image_tag(post.image.url(:small)), post
+  %h3= link_to post.title, post
   %p= post.content
-  %p= link_to post.link
+  %p= link_to post.link, post.link
+  %p= pluralize(post.comments.count, "Comment")
+  %p= pluralize(post.get_likes.size, "Like")
   %hr/
 
 %p=link_to "New Post", new_post_path

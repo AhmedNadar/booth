@@ -1,10 +1,31 @@
-%p= @post.title
-%p= @post.link
+%h2= @post.title
+%p= image_tag @post.image.url(:medium)
+%p= link_to @post.link, @post.link
 %p= @post.content
+%p= @post.get_likes.size
+%p= @post.get_dislikes.size
 
-%hr/
-=link_to "Edit", edit_post_path(@post)
-|
-=link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }
-|
-=link_to "Home", root_path
+- if user_signed_in?
+  = link_to 'Dislike', dislike_post_path(@post), method: :get
+  = link_to 'Like', like_post_path(@post), method: :get
+
+%h2= pluralize(@post.comments.count, "Comment")
+= render 'comments/comments'
+%h3 Reply to thread
+- if user_signed_in?
+  = render "comments/form"
+  %p
+  =link_to "Edit Post", edit_post_path(@post)
+  |
+  =link_to "Delete Post", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }
+
+- else
+  %p
+    You need to
+    = link_to "sign in", new_user_session_path
+    before you comment!
+
+%p Random Posts
+= link_to (image_tag @random_post.image.url(:medium)), post_path(@random_post)
+= @random_post.title
+= @random_post.user.name
